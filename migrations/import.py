@@ -8,7 +8,7 @@ Base = declarative_base()
 
 
 class BookRecord(Base):
-    __tablename__ = 'book_record'
+    __tablename__ = 'books'
     isbn = Column(String(10), primary_key=True)
     title = Column(String(200), nullable=False)
     author = Column(String(200), nullable=False)
