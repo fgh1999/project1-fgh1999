@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+    <div class="page-header"><h1>book.title</h1></div>
+
+    <div class="row">
+        <h2 class="col-8">Book Details</h2>
+        <div class="col-4"></div>
+    </div>
+    <div class="row">
+            <div class="col-3">ISBN</div>
+            <div class="col-3">Title</div>
+            <div class="col-3">Author</div>
+            <div class="col-3">Year</div>
+    </div>
+    <div class="row" href="{{ url_for('main.book', isbn=book.isbn) }}">
+        <div class="col-3">{{ book.isbn }}</div>
+        <div class="col-3">{{ book.title }}</div>
+        <div class="col-3">{{ book.author }}</div>
+        <div class="col-3">{{ book.year }}</div>
+    </div>
+
+    <div class="row">
+        <h2 class="col-8">Reviews</h2>
+        <div class="col-4"><a href="{{ url_for('main.add_view', isbn=book.isbn) }}">Add a review!</a></div>
+    </div>
+
+    {% if reviews %}
+        {% for review in reviews %}
+                <div class="row">
+                <div class="col-2">review.user.name</div>
+                <div class="col-10">review.content</div>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

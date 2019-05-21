@@ -23,7 +23,7 @@ class Review(db.Model):
         return f"<Review {self.id}: {self.content}>"
 
 
-class BookRecord(db.Model):
+class Book(db.Model):
     __tablename__ = 'books'
     isbn = db.Column(db.String(10), primary_key=True)
     title = db.Column(db.String(200), nullable=False)

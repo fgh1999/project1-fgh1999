@@ -1,5 +1,8 @@
 wtforms
 Flask
 Flask-Session
+flask-sqlalchemy
+flask-wtf
+flask-bootstrap
 psycopg2
 SQLAlchemy

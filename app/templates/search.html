@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>Search the Book You Want</h1>
+    </div>
+    {{ wtf.quick_form(form) }}
+
+    {% if search_success %} {# search results #}
+        <div class="row">
+            <div class="col-3">ISBN</div>
+            <div class="col-3">Title</div>
+            <div class="col-3">Author</div>
+            <div class="col-3">Year</div>
+        </div>
+        {% for book in results %}
+            <a class="row" href="{{ url_for('main.book', isbn=book.isbn) }}">
+                <div class="col-3">{{ book.isbn }}</div>
+                <div class="col-3">{{ book.title }}</div>
+                <div class="col-3">{{ book.author }}</div>
+                <div class="col-3">{{ book.year }}</div>
+            </a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
