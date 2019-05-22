@@ -9,17 +9,17 @@
 
     {% if search_success %} {# search results #}
         <div class="row">
-            <div class="col-3">ISBN</div>
-            <div class="col-3">Title</div>
-            <div class="col-3">Author</div>
-            <div class="col-3">Year</div>
+            <span class="col">ISBN</div>
+            <span class="col">Title</div>
+            <span class="col">Author</div>
+            <span class="col">Year</div>
         </div>
         {% for book in results %}
             <a class="row" href="{{ url_for('main.book', isbn=book.isbn) }}">
-                <div class="col-3">{{ book.isbn }}</div>
-                <div class="col-3">{{ book.title }}</div>
-                <div class="col-3">{{ book.author }}</div>
-                <div class="col-3">{{ book.year }}</div>
+                <span class="col">{{ book.isbn }}</div>
+                <span class="col">{{ book.title }}</div>
+                <span class="col">{{ book.author }}</div>
+                <span class="col">{{ book.year }}</div>
             </a>
         {% endfor %}
     {% endif %}

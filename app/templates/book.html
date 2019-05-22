@@ -1,28 +1,29 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-    <div class="page-header"><h1>book.title</h1></div>
+    <div class="page-header"><h1>{{ book.title }}</h1></div>
 
     <div class="row">
         <h2 class="col-8">Book Details</h2>
         <div class="col-4"></div>
     </div>
-    <div class="row">
-            <div class="col-3">ISBN</div>
-            <div class="col-3">Title</div>
-            <div class="col-3">Author</div>
-            <div class="col-3">Year</div>
-    </div>
-    <div class="row" href="{{ url_for('main.book', isbn=book.isbn) }}">
-        <div class="col-3">{{ book.isbn }}</div>
-        <div class="col-3">{{ book.title }}</div>
-        <div class="col-3">{{ book.author }}</div>
-        <div class="col-3">{{ book.year }}</div>
-    </div>
-
+    <table>
+      <tr>
+        <td>ISBN</td>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Year</td>
+      </tr>
+      <tr>
+        <td>{{ book.isbn }}</td>
+        <td><a herf="{{ url_for('main.book', isbn=book.isbn) }}">{{ book.title }}</a></td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.year }}</td>
+      </tr>
+    </table>
     <div class="row">
         <h2 class="col-8">Reviews</h2>
-        <div class="col-4"><a href="{{ url_for('main.add_view', isbn=book.isbn) }}">Add a review!</a></div>
+        <div class="col-4"><a href="{{ url_for('main.add_review', isbn=book.isbn) }}">Add a review!</a></div>
     </div>
 
     {% if reviews %}
