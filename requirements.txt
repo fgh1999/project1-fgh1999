@@ -6,3 +6,4 @@ flask-wtf
 flask-bootstrap
 psycopg2
 SQLAlchemy
+flask-migrate

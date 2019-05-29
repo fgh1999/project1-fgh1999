@@ -8,19 +8,21 @@
     {{ wtf.quick_form(form) }}
 
     {% if search_success %} {# search results #}
-        <div class="row">
-            <span class="col">ISBN</div>
-            <span class="col">Title</div>
-            <span class="col">Author</div>
-            <span class="col">Year</div>
-        </div>
-        {% for book in results %}
-            <a class="row" href="{{ url_for('main.book', isbn=book.isbn) }}">
-                <span class="col">{{ book.isbn }}</div>
-                <span class="col">{{ book.title }}</div>
-                <span class="col">{{ book.author }}</div>
-                <span class="col">{{ book.year }}</div>
-            </a>
-        {% endfor %}
+        <table>
+      <tr>
+        <td>ISBN</td>
+        <td>Title</td>
+        <td>Author</td>
+        <td>Year</td>
+      </tr>
+    {% for book in results %}
+      <tr>
+        <td>{{ book.isbn }}</td>
+        <td><a href="{{ url_for('main.book', isbn=book.isbn) }}">{{ book.title }}</a></td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.year }}</td>
+      </tr>
+    {% endfor %}
+    </table>
     {% endif %}
 {% endblock %}

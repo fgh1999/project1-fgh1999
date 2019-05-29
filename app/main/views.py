@@ -11,7 +11,7 @@ def login():
     form = UserForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.name.data).first()
-        if user is not None and user.pwd == form.name.data:
+        if user is not None and user.pwd == form.pwd.data:
             session['have_login'] = True
             session['user_id'] = user.id
             flash('successfully login!')
@@ -80,8 +80,8 @@ def register():
                            have_login=session.get('have_login', False))
 
 
-@main.route('/book/<string:isbn>', methods=['GET'])
-def book(isbn: str):
+@main.route('/book/<isbn>', methods=['GET'])
+def book(isbn):
     if isbn is None:
         abort(400)
     result = Book.query.filter_by(isbn=isbn).first()
@@ -94,9 +94,9 @@ def book(isbn: str):
                                have_login=session.get('have_login', False))
 
 
-@main.route('/add-review/<string:isbn>', methods=['GET', 'POST'])
-def add_review(isbn: str):
-    if isbn is None or session.get('have_login', False):
+@main.route('/addReview/<string:isbn>', methods=['GET', 'POST'])
+def addReview(isbn: str):
+    if isbn is None:
         abort(400)
     form = ReviewForm()
     result = Book.query.filter_by(isbn=isbn).first()
@@ -107,11 +107,12 @@ def add_review(isbn: str):
         new_review = Review(content=form.content.data,
                             user_id=session.get('user_id', -1),
                             book_isbn=isbn)
-        result.reviews.push(new_review)
-        user.reviews.push(new_review)
+        result.reviews.append(new_review)
+        user.reviews.append(new_review)
         db.session.add_all([new_review, result, user])
         db.session.commit()
         flash("Thank You for Your Review!")
-    return render_template('add-review.html', form=form,
+        return redirect(url_for('.book', isbn=isbn))
+    return render_template('add-review.html', form=form, bookName=result.title,
                            have_login=session.get('have_login', False))
 

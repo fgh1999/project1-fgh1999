@@ -16,21 +16,21 @@
       </tr>
       <tr>
         <td>{{ book.isbn }}</td>
-        <td><a herf="{{ url_for('main.book', isbn=book.isbn) }}">{{ book.title }}</a></td>
+        <td>{{ book.title }}</td>
         <td>{{ book.author }}</td>
         <td>{{ book.year }}</td>
       </tr>
     </table>
     <div class="row">
         <h2 class="col-8">Reviews</h2>
-        <div class="col-4"><a href="{{ url_for('main.add_review', isbn=book.isbn) }}">Add a review!</a></div>
+        <div class="col-4"><a href="{{ url_for('main.addReview', isbn=book.isbn) }}">Add a review!</a></div>
     </div>
 
     {% if reviews %}
         {% for review in reviews %}
                 <div class="row">
-                <div class="col-2">review.user.name</div>
-                <div class="col-10">review.content</div>
+                <div class="col-2">{{ review.user.name}} </div>
+                <div class="col-10">{{review.content}}</div>
             </div>
         {% endfor %}
     {% endif %}
